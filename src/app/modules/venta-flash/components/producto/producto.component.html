@@ -9,23 +9,26 @@
                         <article class="gallery-wrap">
                             <div class="card img-big-wrap">
                                 <a href="#"> <img src="assets/images/items/9.jpg"></a>
-                            </div> <!-- card img-big-wrap.// -->
+                            </div> 
                             <div class="thumbs-wrap">
                                 <a href="#" class="item-thumb"> <img src="assets/images/items/9.jpg"></a>
                                 <a href="#" class="item-thumb"> <img src="assets/images/items/9.jpg"></a>
                                 <a href="#" class="item-thumb"> <img src="assets/images/items/9.jpg"></a>
                                 <a href="#" class="item-thumb"> <img src="assets/images/items/9.jpg"></a>
-                            </div> <!-- thumbs-wrap .// -->
-                        </article> <!-- gallery-wrap .end// -->
+                            </div> 
+                        </article>
                     </aside>
                     <main class="col-md-6">
                         <article>
-                            <h3 class="title">Nuevo producto en oferta</h3>
+                            <h3 class="title">
+                                {{sNombreProducto}}
+                            </h3>
                             <div>
                                 <ul class="rating-stars">
                                     <li class="stars-active">
                                         <i class="fa fa-star"></i> <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i> 
 
                                     </li>
                                     <li>
@@ -34,39 +37,40 @@
                                         <i class="fa fa-star"></i>
                                     </li>
                                 </ul>
-                                <span class="label-rating mr-3 text-muted">7/10</span>
-                                <a href="#" class="btn-link  mr-3 text-muted"> <i class="fa fa-heart"></i> Save for
-                                    later </a>
-                                <a href="#" class="btn-link text-muted"> <i class="fa fa-book-open"></i> Compare </a>
+                                <span class="label-rating mr-3 text-muted">{{nCalificacion}}/10</span>
+                                <a href="#" class="btn-link  mr-3 text-muted">
+                                    <i class="fa fa-heart"></i>
+                                    Guardar Favorito
+                                </a>
+                                <!-- <a href="#" class="btn-link text-muted"> <i class="fa fa-book-open"></i> Compare </a> -->
                             </div>
 
                             <hr>
 
                             <div class="mb-3">
-                                <h6>Short description</h6>
-                                <ul class="list-dots mb-0">
-                                    <li>Made in Russia</li>
-                                    <li>Wolf leather </li>
-                                    <li>Rubber material bottom</li>
-                                    <li>Dark blue color</li>
+                                <h6>Descripción</h6>
+                                <ul class="list-dots mb-0" *ngFor="let opc of listDescription">
+                                    <li>{{opc}}</li>
                                 </ul>
                             </div>
 
                             <div class="mb-3">
-                                <var class="price h4">$230.00</var> <br>
-                            </div> <!-- price-detail-wrap .// -->
-
-                            <div class="mb-4">
-                                <a href="#" class="btn btn-primary mr-1">Comprar Ahora</a>
+                                <var class="price h4" *ngIf="producto">
+                                    S/. {{nPrecio | number: '2.2-2'}}</var>
+                                <br>
                             </div>
 
-                        </article> <!-- product-info-aside .// -->
-                    </main> <!-- col.// -->
-                </div> <!-- row.// -->
-            </div> <!-- card-body.// -->
+                            <div class="mb-4">
+                                <button (click)="fnOpenModalBuyNow()" class="btn btn-primary mr-1">Comprar
+                                    Ahora</button>
+                            </div>
+
+                        </article>
+                    </main>
+                </div>
+            </div>
         </article>
     </div>
-
 
 </section>
 <!-- ========================= SECTION CONTENT END// ========================= -->

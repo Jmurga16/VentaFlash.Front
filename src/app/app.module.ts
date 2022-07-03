@@ -1,17 +1,15 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
 import { AppMaterialModule } from './shared/material/app-material.module';
-//import { NgxSpinnerModule } from 'ngx-spinner';
-
+import { NgxSpinnerModule } from 'ngx-spinner';
 import { HeaderComponent } from './core/components/header/header.component';
 import { FooterComponent } from './core/components/footer/footer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ContainerInsideComponent } from './core/components/container-inside/container-inside.component';
-
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
+import { InterceptorService } from './core/interceptors/interceptor.service';
 
 @NgModule({
   declarations: [
@@ -22,12 +20,17 @@ import { ContainerInsideComponent } from './core/components/container-inside/con
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     AppMaterialModule,
-    BrowserAnimationsModule,
-    //NgxSpinnerModule,
+    HttpClientModule,
+    NgxSpinnerModule,
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: InterceptorService,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

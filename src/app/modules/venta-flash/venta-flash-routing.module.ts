@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ContainerInsideComponent } from 'src/app/core/components/container-inside/container-inside.component';
 import { ProductoComponent } from './components/producto/producto.component';
-import { VentaFlashComponent } from './venta-flash.component';
-
 
 const routes: Routes = [
     {

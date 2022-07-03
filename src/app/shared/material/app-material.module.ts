@@ -39,7 +39,6 @@ import { MatDatepickerModule } from "@angular/material/datepicker";
 
 @NgModule({
   imports: [
-    BrowserAnimationsModule,
     MatButtonModule,
     MatToolbarModule,
     MatSidenavModule,
@@ -77,7 +76,6 @@ import { MatDatepickerModule } from "@angular/material/datepicker";
     MatTreeModule,
   ],
   exports: [
-    BrowserAnimationsModule,
     MatButtonModule,
     MatToolbarModule,
     MatSidenavModule,
@@ -115,7 +113,7 @@ import { MatDatepickerModule } from "@angular/material/datepicker";
     MatTreeModule,
   ],
   providers: [
-    {provide: MAT_DATE_LOCALE, useValue: 'es-ES'},
+    { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },
   ],
 })
-export class AppMaterialModule {}
+export class AppMaterialModule { }
