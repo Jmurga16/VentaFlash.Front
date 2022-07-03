@@ -29,15 +29,25 @@
                 </mat-form-field>
             </div>
 
-            <div class="col-md-12">
+            <div class="col-md-12 mt-2">
                 <mat-form-field style="display:initial">
                     <mat-label>Correo</mat-label>
                     <input matInput type="email" formControlName="sCorreo" autocomplete="off" name="Correo" id="Correo"
                         step="0.01" />
                 </mat-form-field>
+                <mat-error
+                    *ngIf="formGroup.controls['sCorreo'].touched && formGroup.controls['sCorreo'].errors?.['email']">
+                    Formato de email inválido
+                </mat-error>
+                <!-- <span class="text-danger" *ngIf="
+                  formGroup.controls['sCorreo'].touched &&
+                  formGroup.controls['sCorreo'].errors?.['email']
+                ">
+                    Formato de email inválido
+                </span> -->
             </div>
 
-            <div class="col-md-12">
+            <div class="col-md-12 mt-2">
                 <mat-form-field style="display:initial">
                     <mat-label>Dirección</mat-label>
                     <input matInput type="text" formControlName="sDireccion" autocomplete="off" name="Direccion"
@@ -48,7 +58,7 @@
 
         <!--Botones-->
 
-        <div class="row" style="padding-top: 1rem;">
+        <div class="row mt-2" style="padding-top: 1rem; ">
             <!--Botones: Guardar-->
             <div class="col-md-6">
                 <button type="submit" color="primary" style="width: 100%;" mat-raised-button>

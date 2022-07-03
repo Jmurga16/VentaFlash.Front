@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import Swal from 'sweetalert2';
 import { OrdenModel } from '../../../models/IOrdenModel';
 import { VentaFlashService } from '../../../services/venta-flash.service';
 
@@ -13,6 +14,7 @@ export class ModalVentaComponent implements OnInit {
 
   formGroup: FormGroup;
   ordenModel: OrdenModel[] = []
+  bBtnSubmit: boolean = true;
 
   constructor(
     public dialogRef: MatDialogRef<ModalVentaComponent>,
@@ -22,10 +24,10 @@ export class ModalVentaComponent implements OnInit {
   ) {
 
     this.formGroup = this.formBuilder.group({
-      sNombre: "",
-      sCorreo: "",
-      sDireccion: "",
-      nStockDisponible: ""
+      nIdProducto: "",
+      sNombre: ["", [Validators.required]],
+      sCorreo: ["", [Validators.required, Validators.email]],
+      sDireccion: ["", [Validators.required]]
     });
 
 
@@ -33,26 +35,58 @@ export class ModalVentaComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.formGroup.controls['nIdProducto'].setValue(this.data.nIdProducto)
+
   }
 
+  //#region Comprar
   onSubmit() {
 
-    /* if (this.fnValidateForm() == false) {
+    if (this.fnValidateForm() == false) {
       return;
-    } */
+    }
 
-    let model = <OrdenModel>this.formGroup.value;
-    this.ventaFlashService.setOrden(model).subscribe({
-      next: (data) => {
+    if (this.bBtnSubmit) {
 
-        console.log(data)
-        this.fnCloseModal(data);
+      this.bBtnSubmit = false;
 
-      },
-      error: (e) => console.error(e)
-    });
-    // return;
+      let model = <OrdenModel>this.formGroup.value;
+      this.ventaFlashService.setOrden(model).subscribe({
+        next: (data) => {
+
+          console.log(data)
+          this.fnCloseModal(data.result);
+          this.bBtnSubmit = true;
+
+        },
+        error: (e) => console.error(e)
+      });
+    }
+
   }
+  //#endregion
+
+
+  //#region Validar Campos
+  fnValidateForm() {
+    console.log(this.formGroup.value)
+    if (!this.formGroup.valid) {
+
+      Swal.fire({
+        title: 'Complete los campos requeridos correctamente.',
+        icon: 'error',
+        timer: 3500
+      })
+      return false
+    }
+    else {
+
+      return true
+    }
+
+  }
+  //#endregion
+
 
   //#region Cerrar
   fnCloseModal(result: any) {

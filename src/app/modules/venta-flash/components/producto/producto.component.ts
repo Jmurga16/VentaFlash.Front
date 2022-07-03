@@ -75,26 +75,26 @@ export class ProductoComponent implements OnInit {
       if (result !== undefined) {
         this.spinner.show();
 
-        //Compra exitosa
-        if (result >= 1) {
-          Swal.fire({
-            title: `Reserva OK`,
-            icon: 'success',
-            timer: 5500
-          });
-        }
-        //Sin Stock
-        else if (result < 1) {
-          Swal.fire({
-            title: `Sin Stock`,
-            icon: 'warning',
-            timer: 5500
-          });
-        }
-
         setTimeout(() => {
           this.spinner.hide();
+          //Compra exitosa
+          if (result >= 0) {
+            Swal.fire({
+              title: `Reserva OK`,
+              icon: 'success',
+              timer: 6500
+            });
+          }
+          //Sin Stock
+          else if (result < 0) {
+            Swal.fire({
+              title: `Sin Stock`,
+              icon: 'warning',
+              timer: 6500
+            });
+          }
         }, 2000);
+
       }
     });
   }
