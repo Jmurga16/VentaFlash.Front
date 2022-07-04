@@ -11,20 +11,20 @@ import { ProductoModel } from '../models/IProductoModel';
 
 export class VentaFlashService {
 
-  url: string = environment.apiUrl
+  url: string = environment.apiUrlV2
 
   constructor(private http: HttpClient) { }
 
   //#region Obtener Producto
   getProduct(): Observable<ProductoModel[]> {
-    return this.http.get<ProductoModel[]>(this.url + '/ProductoService');
+    return this.http.get<ProductoModel[]>(this.url + '/Product');
   }
   //#endregion
 
   
   //#region Guardar Orden 
   setOrden(orden: OrdenModel): Observable<any> {
-    return this.http.post(this.url + "/OrdenService",orden);
+    return this.http.post(this.url + "/Order",orden);
   }
   //#endregion
 

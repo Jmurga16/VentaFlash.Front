@@ -54,8 +54,8 @@ export class ModalVentaComponent implements OnInit {
       this.ventaFlashService.setOrden(model).subscribe({
         next: (data) => {
 
-          console.log(data)
-          this.fnCloseModal(data.result);
+          console.log('Stock: ' + data)
+          this.fnCloseModal(data);
           this.bBtnSubmit = true;
 
         },
@@ -69,7 +69,7 @@ export class ModalVentaComponent implements OnInit {
 
   //#region Validar Campos
   fnValidateForm() {
-    console.log(this.formGroup.value)
+
     if (!this.formGroup.valid) {
 
       Swal.fire({

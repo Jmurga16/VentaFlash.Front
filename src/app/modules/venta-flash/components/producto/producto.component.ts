@@ -40,7 +40,7 @@ export class ProductoComponent implements OnInit {
   //#region Obtener Producto en Oferta Flash
   fnGetProduct() {
     this.ventaFlashService.getProduct().subscribe((success) => {
-      //console.log(success)
+     
       this.producto = success
       console.log(this.producto)
 
@@ -70,7 +70,7 @@ export class ProductoComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(result)
+     
       //Resultado despues de cerrar modal
       if (result !== undefined) {
         this.spinner.show();
