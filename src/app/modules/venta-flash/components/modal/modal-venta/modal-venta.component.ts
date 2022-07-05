@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { NgxSpinnerService } from 'ngx-spinner';
 import Swal from 'sweetalert2';
 import { OrdenModel } from '../../../models/IOrdenModel';
 import { VentaFlashService } from '../../../services/venta-flash.service';
@@ -21,6 +22,7 @@ export class ModalVentaComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private ventaFlashService: VentaFlashService,
     private formBuilder: FormBuilder,
+    private spinner: NgxSpinnerService
   ) {
 
     this.formGroup = this.formBuilder.group({
@@ -49,6 +51,7 @@ export class ModalVentaComponent implements OnInit {
     if (this.bBtnSubmit) {
 
       this.bBtnSubmit = false;
+      this.spinner.show();
 
       let model = <OrdenModel>this.formGroup.value;
       this.ventaFlashService.setOrden(model).subscribe({
@@ -59,7 +62,13 @@ export class ModalVentaComponent implements OnInit {
           this.bBtnSubmit = true;
 
         },
-        error: (e) => console.error(e)
+        error: (e) => {
+          console.error(e)
+          this.bBtnSubmit = true;
+
+          this.spinner.hide();
+
+        }
       });
     }
 

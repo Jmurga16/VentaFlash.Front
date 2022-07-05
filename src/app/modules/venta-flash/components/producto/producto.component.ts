@@ -32,17 +32,17 @@ export class ProductoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.spinner.show();
     this.fnGetProduct();
-
+    
   }
 
   //#region Obtener Producto en Oferta Flash
   fnGetProduct() {
     this.ventaFlashService.getProduct().subscribe((success) => {
-     
+
       this.producto = success
-      console.log(this.producto)
+      //console.log(this.producto)
 
       this.nIdProducto = success[0].nIdProducto
       this.sNombreProducto = success[0].sNombreProducto
@@ -53,6 +53,7 @@ export class ProductoComponent implements OnInit {
 
       this.listDescription = success[0].sDescripcion.split(';')
 
+      this.spinner.hide()
     });
   }
   //#endregion
@@ -70,10 +71,10 @@ export class ProductoComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-     
+
       //Resultado despues de cerrar modal
       if (result !== undefined) {
-        this.spinner.show();
+        //this.spinner.show();
 
         setTimeout(() => {
           this.spinner.hide();
